@@ -1,0 +1,45 @@
+<ngx-loading [show]="loading"></ngx-loading>
+
+<header>
+  <h1 class="storeTitle">Manage</h1>
+</header>
+
+<section>
+  <div class="adddNewItem" (click)="clothModal.show()">
+    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+    <span>Add New Item</span>
+  </div>
+
+  <app-cloth-data #clothModal [title]="'Add New Item'" (addClothEvent)="onAddNewCloth($event)"></app-cloth-data>
+
+  <div class="providerTable" *ngFor="let provider of objectKeys(providersData)">
+    <app-provider-table providerName="{{provider}}" [providerClothes]="getProviderData(provider)"
+                       (setLoading)="setLoading($event)"></app-provider-table>
+  </div>
+</section>
+
+<hr>
+
+
+<!-- additional
+<section>
+  <app-evaluation [providersData]="providersData"></app-evaluation>
+</section>
+
+<hr>
+-->
+<section>
+  <div class="addNewItem" (click)="branchModal.show()">
+    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+    <span>Add New Branch</span>
+  </div>
+  <br/>
+
+  <app-branch-data #branchModal [title]="'Add New Branch'" (addBranchEvent)="onAddNewBranch($event)"></app-branch-data>
+
+  <app-branch-table [branches]="branches" (setLoading)="setLoading($event)"></app-branch-table>
+</section>
+
+
+<app-alert #childAlert [message]="alertMsg" [isSuccess]="isAlertSuccess"></app-alert>
+
